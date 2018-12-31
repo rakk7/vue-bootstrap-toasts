@@ -1,0 +1,6 @@
+# Folders to ignore
+node_modules
+
+# Editor
+.vscode
+
