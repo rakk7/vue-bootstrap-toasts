@@ -26,6 +26,7 @@ Vue.use(VueBootstrapToasts)
 Or if u want override default values
 ```
 <Toasts
+	:rtl="true"
 	:max-messages="7"
 	:time-out="5000" // 5 secs
 ></Toasts>
