@@ -8,7 +8,7 @@ const ToastsPlugin = {
         Vue.prototype.$toast = {
 
             /**
-             * Send the event on a channel (toast-message) with a given payload.
+             * Send the event on channel (toast-message) with a given payload.
              *
              * @param {string} message
              * @param {string} type
@@ -66,7 +66,6 @@ const ToastsPlugin = {
 };
 
 // auto install by default
-// equal to Vue.use(window.vueToastr)
 if (typeof window !== "undefined" && window.Vue) {
     window.Vue.use(ToastsPlugin);
 }
