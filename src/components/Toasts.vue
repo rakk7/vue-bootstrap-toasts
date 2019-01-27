@@ -231,7 +231,7 @@ export default {
   top: 20px;
   right: 20px;
   min-width: 350px;
-  z-index: 200;
+  z-index: 1090;
 }
 .toast-icon {
   position: absolute;
