@@ -35,6 +35,7 @@ Or if u want to override default values
 
 ```
 <Toasts
+	:rtl="true"
 	:max-messages="7"
 	:time-out="5000" // 5 secs
 ></Toasts>
