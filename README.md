@@ -46,7 +46,7 @@ Or if u want to override default values
 ```
 this.$toast.success('your message');
 this.$toast.error('your message');
-this.$toast.warning('your message);
+this.$toast.warning('your message');
 this.$toast.info('your message');
 ```
 
