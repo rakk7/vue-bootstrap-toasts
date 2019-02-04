@@ -227,7 +227,7 @@ export default {
 
 <style scoped>
 .toast-container {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   min-width: 350px;
