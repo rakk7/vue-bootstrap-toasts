@@ -234,7 +234,7 @@ export default {
   z-index: 1090;
 }
 .toast-icon {
-  position: absolute;
+  position: fixed;
   width: 22px;
   height: 22px;
   transform: translateY(-50%);
