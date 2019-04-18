@@ -1,6 +1,6 @@
 {
   "name": "vue-bootstrap-toasts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "use bootstrap 4 toasts with vue.",
   "main": "src/index.js",
   "scripts": {
