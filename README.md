@@ -38,6 +38,7 @@ Or if u want to override default values
 	:rtl="true"
 	:max-messages="7"
 	:time-out="5000" // 5 secs
+	:closeable="false"
 ></Toasts>
 ```
 
@@ -48,6 +49,16 @@ this.$toast.success('your message');
 this.$toast.error('your message');
 this.$toast.warning('your message');
 this.$toast.info('your message');
+```
+
+Or Pass an options per toast
+
+```
+this.$toast.success("your message", {
+	rtl: true,
+	timeOut: 0, // infinity
+	closeable: false
+});
 ```
 
 ### Thats it.
