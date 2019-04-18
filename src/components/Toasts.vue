@@ -47,7 +47,7 @@ export default {
     },
     maxMessages: {
       type: Number,
-      default: 6
+      default: 5
     },
     timeOut: {
       type: Number,
