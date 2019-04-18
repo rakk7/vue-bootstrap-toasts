@@ -1,73 +1,69 @@
 import Toasts from "./components/Toasts.vue";
-import {EventBus} from "./event-bus";
+import { EventBus } from "./event-bus";
 
 const ToastsPlugin = {
-    install(Vue) {
+  install(Vue) {
+    // attach these methods with Vue instance
+    Vue.prototype.$toast = {
+      /**
+       * Send the event on channel (toast-message) with a given payload.
+       *
+       * @param {string} message
+       * @param {string} type
+       */
+      send(message, type, options) {
+        EventBus.$emit("toast-message", {
+          message: message,
+          type: type,
+          options: options
+        });
+      },
 
-        // attach these methods with Vue instance
-        Vue.prototype.$toast = {
+      /**
+       * Send a success message event.
+       *
+       * @param {string} message
+       */
+      success(message, options = {}) {
+        this.send(message, "success", options);
+      },
 
-            /**
-             * Send the event on channel (toast-message) with a given payload.
-             *
-             * @param {string} message
-             * @param {string} type
-             */
-            send(message, type) {
-                EventBus.$emit("toast-message", {
-                    message: message,
-                    type: type
-                });
-            },
+      /**
+       * Send a warning message event.
+       *
+       * @param {string} message
+       */
+      warning(message, options = {}) {
+        this.send(message, "warning", options);
+      },
 
-            /**
-             * Send a success message event.
-             *
-             * @param {string} message
-             */
-            success(message) {
-                this.send(message, "success");
-            },
+      /**
+       * Send an info message event.
+       *
+       * @param {string} message
+       */
+      info(message, options = {}) {
+        this.send(message, "info", options);
+      },
 
+      /**
+       * Send an error message event.
+       *
+       * @param {string} message
+       */
+      error(message, options = {}) {
+        this.send(message, "danger", options);
+      }
+    };
 
-            /**
-             * Send a warning message event.
-             *
-             * @param {string} message
-             */
-            warning(message) {
-                this.send(message, "warning");
-            },
-
-            /**
-             * Send an info message event.
-             *
-             * @param {string} message
-             */
-            info(message) {
-                this.send(message, "info");
-            },
-
-            /**
-             * Send an error message event.
-             *
-             * @param {string} message
-             */
-            error(message) {
-                this.send(message, "danger");
-            },
-
-        };
-
-        // register the component
-        Vue.component("Toasts", Toasts);
-
-    }
+    // register the component
+    Vue.component("Toasts", Toasts);
+  }
 };
 
 // auto install by default
 if (typeof window !== "undefined" && window.Vue) {
-    window.Vue.use(ToastsPlugin);
+  window.Vue.use(ToastsPlugin);
 }
 
 export default ToastsPlugin;

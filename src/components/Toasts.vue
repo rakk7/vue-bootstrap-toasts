@@ -8,25 +8,26 @@
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
-        @mouseover="item.paused = true"
+        @mouseover="pauseProgress(item)"
         @mouseout="resumeProgress(item)"
       >
-        <div class="progress rounded-0" style="height: 6px;">
+        <div v-if="item.timeOut > 0" class="progress rounded-0" style="height: 6px;">
           <div :class="'bg-' + item.type" :style="{ width: getCurrentProgress(item) + '%' }"></div>
         </div>
 
-        <div class="toast-header" :class="'bg-' + item.type">
+        <div class="toast-header" :class="'bg-' + item.type" style="height: 35px;">
           <strong class="ml-auto">
             <i class="toast-icon" :class="getIconClass(item)"></i>
           </strong>
           <button
+            v-if="item.closeable"
             type="button"
             class="mr-2 mb-1 close"
             data-dismiss="toast"
             aria-label="Close"
             @click="remove(item)"
           >
-            <span aria-hidden="true">&times;</span>
+            <span class aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="toast-body">{{ item.message }}</div>
@@ -46,11 +47,15 @@ export default {
     },
     maxMessages: {
       type: Number,
-      default: 5
+      default: 6
     },
     timeOut: {
       type: Number,
       default: 3000
+    },
+    closeable: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -67,7 +72,7 @@ export default {
      */
     handleMessageEvent(payload) {
       if (payload.message) {
-        this.addMessage(payload.message, payload.type);
+        this.addMessage(payload.message, payload.type, payload.options);
       }
     },
 
@@ -77,16 +82,22 @@ export default {
      * @param {string} message
      * @param {string} type
      */
-    addMessage(message, type) {
+    addMessage(message, type, options = {}) {
       // message object data
       var messageData = {
         id: this.count++,
         message: message,
         type: type,
+        timeOut: this.timeOut,
+        closeable: this.closeable,
+        rtl: this.rtl,
         progress: 0,
         paused: false,
         animationFrame: null
       };
+
+      // merge custom options
+      messageData = Object.assign({}, messageData, options);
 
       // prepend new message to front of messages's array
       this.messages.unshift(messageData);
@@ -97,8 +108,10 @@ export default {
         this.messages.splice(this.maxMessages);
       }
 
-      // start message timeout
-      this.startTimeout(messageData);
+      if (messageData.timeOut > 0) {
+        // start message timeout
+        this.startTimeout(messageData);
+      }
     },
 
     /**
@@ -124,9 +137,9 @@ export default {
             cancelAnimationFrame(messageData.animationFrame);
             return;
             // check if timout value has not been reached
-          } else if (timeElapsed < self.timeOut) {
+          } else if (timeElapsed < messageData.timeOut) {
             // calcalute the prograss
-            const progress = timeElapsed / self.timeOut;
+            const progress = timeElapsed / messageData.timeOut;
             // set a new progress
             messageData.progress = progress;
             // continue calculating the progress
@@ -147,15 +160,31 @@ export default {
     },
 
     /**
+     * Pause prograss bar when hovering on a toast.
+     *
+     * @param {object} messageData
+     */
+    pauseProgress(messageData) {
+      if (messageData.timeOut <= 0) return;
+
+      messageData.paused = true;
+    },
+
+    /**
      * Resume prograss bar when going a way from 'mouseover' status.
      *
      * @param {object} messageData
      */
     resumeProgress(messageData) {
+      if (messageData.timeOut <= 0) return;
+
       messageData.paused = false;
 
       // re-start animation calculating with a given start point
-      this.startTimeout(messageData, this.timeOut * messageData.progress);
+      this.startTimeout(
+        messageData,
+        messageData.timeOut * messageData.progress
+      );
     },
 
     /**
@@ -182,7 +211,7 @@ export default {
     getIconClass(messageData) {
       var iconClass = "toast-icon-" + messageData.type;
 
-      if (this.rtl) {
+      if (messageData.rtl) {
         return "icon-right " + iconClass;
       }
       return "icon-left " + iconClass;
