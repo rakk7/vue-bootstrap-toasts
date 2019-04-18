@@ -1,48 +1,79 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
     <title>Demo page</title>
 
     <style>
-        html,
-        body,
-        #app {
-            height: 100%;
-            background-color: #333;
-        }
+      html,
+      body,
+      #app {
+        height: 100%;
+        background-color: #333;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <Toasts></Toasts>
-        <div class="container h-100">
-            <div class="row h-100 justify-content-center align-items-center">
-                <div class="col-12 text-center">
-                    <h1 class="display-3 my-5 text-light">Bootstrap 4 toasts with vue 2</h1>
+      <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-12 text-center">
+            <h1 class="display-3 my-5 text-light">
+              Bootstrap 4 toasts with vue 2
+            </h1>
 
-                    <div class="col-6 mb-5 text-center mx-auto">
-                        <input type="text" class="form-control form-control-lg" v-model="currentMessage" placeholder="Type your message here..">
-                    </div>
-
-                    <button type="button" class="btn btn-success" @click="$toast.success(currentMessage)">Success</button>
-                    <button type="button" class="btn btn-danger" @click="$toast.error(currentMessage)">Danger</button>
-                    <button type="button" class="btn btn-warning" @click="$toast.warning(currentMessage)">Warning</button>
-                    <button type="button" class="btn btn-info" @click="$toast.info(currentMessage)">Info</button>
-                </div>
+            <div class="col-6 mb-5 text-center mx-auto">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                v-model="currentMessage"
+                placeholder="Type your message here.."
+              />
             </div>
+
+            <button
+              type="button"
+              class="btn btn-success"
+              @click="$toast.success(currentMessage)"
+            >
+              Success
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              @click="$toast.error(currentMessage)"
+            >
+              Danger
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              @click="$toast.warning(currentMessage)"
+            >
+              Warning
+            </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              @click="$toast.info(currentMessage)"
+            >
+              Info
+            </button>
+          </div>
         </div>
+      </div>
+      <Toasts></Toasts>
     </div>
     <script src="https://vuejs.org/js/vue.min.js"></script>
     <script src="../dist/vue-bootstrap-toasts.js"></script>
 
     <script src="./bulid/app.js"></script>
-
-</body>
-
+  </body>
 </html>
