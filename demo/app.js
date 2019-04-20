@@ -1,9 +1,9 @@
 new Vue({
-    el: "#app",
+  el: "#app",
 
-    data() {
-        return {
-            currentMessage: "this is a default message",
-        };
-    },
+  data() {
+    return {
+      currentMessage: "this is a default message"
+    };
+  }
 });

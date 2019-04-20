@@ -1,35 +1,33 @@
 module.exports = {
-    env: {
-        browser: true,
-        es6: true
-    },
-    extends: ["eslint:recommended", "plugin:vue/strongly-recommended"],
-    parserOptions: {
-        ecmaVersion: 2018,
-        parser: "babel-eslint",
-        sourceType: "module"
-    },
-    rules: {
-        quotes: ["error", "double"],
-        semi: ["error", "always"],
-        "no-console": "off",
-        "linebreak-style": ["error", "windows"],
-        "no-undef": 0,
-        "object-curly-newline": ["error", {
-            "ImportDeclaration": {
-                "multiline": true
-            },
-        }],
-        "vue/max-attributes-per-line": [4,
-            {
-                "singleline": 4,
-                "multiline": {
-                    "max": 1,
-                    "allowFirstLine": true
-                }
-            }
-        ],
-        "vue/html-self-closing": "off",
-        "vue/singleline-html-element-content-newline": "off",
-    }
+  env: {
+    browser: true,
+    es6: true
+  },
+  extends: ["eslint:recommended", "plugin:vue/recommended"],
+  parserOptions: {
+    parser: "babel-eslint",
+    ecmaVersion: 2018,
+    sourceType: "module"
+  },
+  rules: {
+    indent: ["error", 2],
+    "vue/html-indent": [
+      "error",
+      2,
+      {
+        baseIndent: 1
+      }
+    ],
+    "vue/max-attributes-per-line": [
+      3,
+      {
+        singleline: 3,
+        multiline: {
+          max: 1,
+          allowFirstLine: true
+        }
+      }
+    ],
+    "vue/singleline-html-element-content-newline": "off"
+  }
 };

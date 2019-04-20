@@ -12,12 +12,12 @@
         @mouseout="resumeProgress(item)"
       >
         <div v-if="item.timeOut > 0" class="progress rounded-0" style="height: 6px;">
-          <div :class="'bg-' + item.type" :style="{ width: getCurrentProgress(item) + '%' }"></div>
+          <div :class="'bg-' + item.type" :style="{ width: getCurrentProgress(item) + '%' }" />
         </div>
 
         <div class="toast-header" :class="'bg-' + item.type" style="height: 35px;">
           <strong class="ml-auto">
-            <i class="toast-icon" :class="getIconClass(item)"></i>
+            <i class="toast-icon" :class="getIconClass(item)" />
           </strong>
           <button
             v-if="item.closeable"
@@ -63,6 +63,10 @@ export default {
       messages: [],
       count: 0
     };
+  },
+  created() {
+    // start listening for "toast-message" channel's events
+    EventBus.$on("toast-message", this.handleMessageEvent);
   },
   methods: {
     /**
@@ -246,10 +250,6 @@ export default {
 
       return true;
     }
-  },
-  created() {
-    // start listening for "toast-message" channel's events
-    EventBus.$on("toast-message", this.handleMessageEvent);
   }
 };
 </script>
