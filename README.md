@@ -35,11 +35,11 @@ Or if u want to override default values
 
 ```
 <Toasts
-	show-progress="false"
+	:show-progress="true"
 	:rtl="true"
 	:max-messages="7"
 	:time-out="5000" // 5 secs
-	:closeable="false"
+	:closeable="true"
 ></Toasts>
 ```
 
@@ -56,7 +56,7 @@ Or Pass an options per toast
 
 ```
 this.$toast.success("your message", {
-	showProgress: false, // disable progress bar
+	showProgress: true,
 	rtl: true,
 	timeOut: 0, // infinity
 	closeable: false
