@@ -11,7 +11,11 @@
         @mouseover="pauseProgress(item)"
         @mouseout="resumeProgress(item)"
       >
-        <div v-if="item.timeOut > 0" class="progress rounded-0" style="height: 6px;">
+        <div
+          v-if="item.timeOut > 0 && item.showProgress"
+          class="progress rounded-0"
+          style="height: 6px;"
+        >
           <div :class="'bg-' + item.type" :style="{ width: getCurrentProgress(item) + '%' }" />
         </div>
 
@@ -41,6 +45,10 @@ import { EventBus } from "../event-bus";
 
 export default {
   props: {
+    showProgress: {
+      type: Boolean,
+      default: true
+    },
     rtl: {
       type: Boolean,
       default: false
@@ -92,6 +100,7 @@ export default {
         id: this.count++,
         message: message,
         type: type,
+        showProgress: this.showProgress,
         timeOut: this.timeOut,
         closeable: this.closeable,
         rtl: this.rtl,
